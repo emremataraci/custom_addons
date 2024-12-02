@@ -9,7 +9,7 @@
     This module provides custom print reports for various Odoo models.
     """,
     'website': 'https://www.yenaengineering.nl',
-    'depends': ['stock', 'project', 'purchase', 'contacts'],
+    'depends': ['stock', 'project', 'purchase', 'contacts', 'batch_transfer_extension', 'stock_picking_batch'],
     'data': [
         'reports/report_action.xml',
         'reports/report_ce.xml',
