@@ -5,7 +5,7 @@
     'summary': 'Extends Batch Transfer with additional fields',
     'author': 'Emre Mataracı',
     'website': 'http://yourwebsite.com',
-    'depends': ['stock', 'project', 'purchase', 'contacts'],
+    'depends': ['stock', 'project', 'purchase', 'contacts', 'stock_picking_batch'],
     'data': [
         'views/batch_transfer_view.xml',
         'security/ir.model.access.csv',
