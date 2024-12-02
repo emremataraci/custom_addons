@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_inherit_yena_development" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.yena.development</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="mark_as_sent" string="Mark as Send" type="object" class="btn-primary"
+                        invisible="state != 'draft'"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="contact_id" string="Contact Person"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" string="Company (Buyer)"/>
+                    <field name="user_id" required="1"/>
+                    <field name="incoterm_id" required="1"/>
+                    <field name="payment_term_id"/>
+                </xpath>
+
+                <xpath expr="//field[@name='analytic_distribution']" position="before">
+                    <field name="account_analytic_id" />
+                </xpath>                
+
+                <xpath expr="//field[@name='price_subtotal']" position="before">
+                    <field name="delivery_date" optional="show"/>
+                    <field name="production_status" optional="hide"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_packaging_qty']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_ref']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="string">Latest Bid Date</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="rfq_date" string="Quo Received Date"/>
+                    <field name="rfq_sent_date" string="S-RFQ Sent Date"/>
+                    <field name="delivery_date" string="S-Required Delivery Date"/>
+                </xpath>
+
+                <xpath expr="//field[@name='effective_date']" position="after">
+                    <field name="customer_reference" required="1" string="C-Reference No"/>
+                    <field name="project_purchase" string="Project Number" required="1"/>
+                    <field name="tags" widget="many2many_tags" string="Tags"/>
+                </xpath>
+
+                <xpath expr="//page/field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+                    <field name="delivery_date"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="(//field[@name='date_approve'])[1]" position="attributes">
+                    <attribute name="widget">date</attribute>
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+ 
+                <xpath expr="//page/field[@name='order_line']/tree//field[@name='taxes_id']" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_line_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.line.tree.inherit</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_tree"/> <!-- Mevcut görünümde miras aldığımızdan emin olun -->
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">false</attribute>
+                    <attribute name="multi_edit">true</attribute>
+                    <attribute name="sample">1</attribute>
+                </xpath>
+
+                <xpath expr="//tree" position="inside">
+                    <field name="order_id" widget="many2one" readonly="1"/>
+                    <field name="account_analytic_id" readonly="1"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="product_uom_category_id" invisible="1" readonly="1"/>
+                    <field name="product_id" widget="many2one" readonly="1"/>
+                    <field name="product_qty" readonly="1"/>
+                    <field name="product_uom" string="UoM" groups="uom.group_uom" readonly="1"/>
+                    <field name="delivery_date" readonly="1"/>
+                    <field name="last_date"/>
+                    <field name="qty_received" readonly="1"/>
+                    <field name="price_unit" optional="hide" readonly="1"/>
+                    <field name="price_subtotal" optional="hide" readonly="1"/>
+                    <field name="currency_id" invisible="1" readonly="1"/>
+                    <field name="tags" widget="many2many_tags" optional="hide" string="Order Tags"/>
+                    <field name="production_status"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_purchase_order_line_overview" model="ir.actions.act_window">
+            <field name="name">Production Overview</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_order_line_tree_inherit"/>
+        </record>
+
+        <menuitem id="menu_purchase_order_line_overview"
+            name="Production Overview"
+            parent="purchase.menu_purchase_root"
+            action="action_purchase_order_line_overview"
+            sequence="10"/>
+
+        <record id="purchase_order_kpis_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.kpis.tree.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="delivery_date" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

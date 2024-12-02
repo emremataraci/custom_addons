@@ -1,0 +1,11 @@
+<odoo>
+    <record id="action_packaging_transportation_request_report" model="ir.actions.report">
+    <field name="name">Transportation Request</field>
+    <field name="model">stock.picking.batch</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">yena_packaging_transportation_request.report_xlsx</field>
+    <field name="report_file">yena_packaging_transportation_request.report_xlsx</field>
+    <field name="binding_model_id" ref="stock_picking_batch.model_stock_picking_batch"/>
+    <field name="binding_type">report</field>
+</record>
+</odoo>

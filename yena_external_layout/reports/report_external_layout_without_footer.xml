@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_without_footer">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <t t-call="yena_external_layout.external_layout_without_footer_standard">
+            <t t-out="0" />
+        </t>
+    </template>
+    <template id="external_layout_without_footer_standard">
+        <style>
+            * {
+            font-family: "DejaVu Sans", Arial, sans-serif !important;
+            }
+        </style>
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{ 'o_layout_background' if company.layout_background in ['Geometric', 'Custom'] else '' }}"
+            t-att-data-oe-model="o and o._name"
+            t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-1" />
+            <t t-out="0" />
+        </div>
+
+        <div class="footer-content">
+            <t t-if="report_type == 'pdf'">
+                <div class="text-muted"><span class="page" /> / <span class="topage" />
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

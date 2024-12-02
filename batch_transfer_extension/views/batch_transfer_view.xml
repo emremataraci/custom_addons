@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_picking_batch_form_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button"
+                        type="object"
+                        name="action_show_purchases"
+                        icon="fa-money"
+                        help="Show related purchases">
+                    <field string="Purchases"
+                           name="purchase_count"
+                           widget="statinfo" />
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="project_ids" widget="many2many_tags" options="{'no_create': True}" />
+                <label for="transportation_code"/>
+                <div class="d-flex">
+                    <field name="transportation_code"/>
+                    <span class="oe_inline o_form_label mr-1 ml-2 oe_edit_only"> </span>
+                    <button name="set_transportation_code" string="Apply" type="object" class="oe_highlight"/>
+                </div>                
+                <!-- <field name="edespatch_delivery_type" required="1" readonly="state == 'done'"/> -->
+                <field name="arrival_date" required="1"/>
+                <field name="vehicle_type_id" required="1"/>
+                <field name="logistic_company" />
+            </xpath>
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <!-- <field name="edespatch_date" required="1" string="Despatch Date"/> -->
+                <field name="customer_ids" widget="many2many_tags" options="{'no_create': True}" required="1"/>
+                <field name="vendor_ids" widget="many2many_tags" options="{'no_create': True}" required="1"/>
+                <field name="situation" required="1"/>
+                <field name="airtag_url" widget="url" options="{'no_open': True}" readonly="1" />
+                <!-- <field name="import_decleration_number"/> -->
+            </xpath>
+            <!-- <xpath expr="//notebook/page[3]" position="after">
+                <page string="Drivers" name="driver_ids" invisible="edespatch_delivery_type != 'edespatch'">
+                    <field name="driver_ids" domain="[('type','=','driver')]" context="{'default_type': 'driver'}">
+                        <tree create="true" edit="false" delete="true" editable="bottom" string="Drivers">
+                            <field name="function"/>
+                            <field name="name"/>
+                            <field name="nationality_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath> -->
+            <!-- <xpath expr="//notebook/page[4]" position="after">
+                <page string="Transport" name="transport_info" invisible="edespatch_delivery_type != 'edespatch'">
+                    <group>
+                        <group>
+                            <field name="edespatch_carrier_id" string="Carrier Partner" domain="[('industry_id.id', '=', 139)]"/>
+                            <field name="transport_type" string="Transport Type" required="edespatch_delivery_type == 'edespatch'"/>
+                            <field name="vehicle_id" string="Vehicle Id" required="edespatch_delivery_type == 'edespatch'" help="AirTransport: aircraft Id - RoadTransport: plate Id - Train: train id - MaritimeTransport: vessel id"/>
+                        </group>
+                        <group name="roadtransport" invisible="transport_type != 'roadtransport'">
+                            <field name="transport_equipment_id" string="Transport Equipment 'Trailer' Plate Id" help="Road Transport Trailer Plate Id"/>
+                        </group>
+                        <group name="railtransport" invisible="transport_type != 'railtransport'">
+                            <field name="rail_car_id" required="transport_type == 'railtransport'"/>
+                        </group>
+                        <group name="maritimetransport" invisible="transport_type != 'maritimetransport'">
+                            <field name="vessel_name"/>
+                            <field name="radio_call_sign_id"/>
+                            <field name="ships_requirements"/>
+                            <field name="gross_tonnage_measure"/>
+                            <field name="net_tonnage_measure"/>
+                            <field name="registry_cert_doc_ref"/>
+                            <field name="registry_port_location"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page[5]" position="after">
+                <page string="e-Despatch Details" name="edespatch_info" invisible="edespatch_delivery_type != 'edespatch'">
+                    <group>
+                        <field name="edespatch_number_sequence"/>
+                        <field name="edespatch_profile"/>
+                        <field name="edespatch_state" string="E-Despatch Status"/>
+                        <field name="edespatch_sender_id"/>
+                        <field name="edespatch_postbox_id"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_batch_despatch_send" type="object"
+                        string="Send All E-Despatchs" class="oe_highlight"
+                        invisible="state != 'done' or edespatch_state != 'draft' or edespatch_delivery_type != 'edespatch'"/>
+            </xpath> -->
+        </field>
+    </record>
+    <!-- <record id="view_picking_tree_batch_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.picking.tree.batch.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_picking_batch.view_picking_tree_batch"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="project_transfer" widget="many2many_tags"/>
+                <field name="commercial_partner_id" optional="show"/>
+            </xpath>
+        </field>
+    </record> -->
+    <record id="stock_picking_batch_move_line_tree" model="ir.ui.view">
+        <field name="name">stock.picking.batch.picking.tree.batch</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock_picking_batch.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_name']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location_dest_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='package_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='result_package_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='picking_id']" position="after">
+                <field name="project_ids" widget="many2many_tags"/>
+                <field name="lot_name" groups="stock.group_production_lot" invisible="parent.show_lots_text == False" readonly="tracking not in ['lot', 'serial']" optional="hide"/>
+                <field name="location_id" optional="show"/>
+                <field name="location_dest_id" optional="show"/>
+                <field name="package_id" groups="stock.group_tracking_lot" optional="hide"/>
+                <field name="result_package_id" groups="stock.group_tracking_lot" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_batch_search_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.search.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="transportation_code"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter string="Last Week to Future Batch Dates"
+                        name="filter_last_week_to_future_batch"
+                        domain="[('arrival_date', '>=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Transportation Code" name="transportation_code" domain="[]" context="{'group_by': 'transportation_code'}"/>
+                    <filter string="Situation" name="situation" domain="[]" context="{'group_by': 'situation'}"/>
+                    <filter string="Batch" name="name" domain="[]" context="{'group_by': 'name'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Operation Type" name="picking_type_id" domain="[]" context="{'group_by': 'picking_type_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_picking_batch_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.batch.tree.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="transportation_code" optional="show"/>
+                <field name="customer_ids" optional="show" widget="many2many_tags"/>
+                <field name="vendor_ids" optional="show" widget="many2many_tags"/>
+                <field name="arrival_date" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

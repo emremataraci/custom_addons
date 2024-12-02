@@ -1,0 +1,141 @@
+<odoo>
+    <template id="report_ce">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="yena_external_layout.external_layout_without_footer">
+                    <style>
+                        * {
+                        font-family: "DejaVu Sans", Arial, sans-serif !important;
+                        }
+                    </style>
+                    <div class="page" style="background-color: transparent; page-break-after: always;">
+                        <table style="width: 100%; border-collapse: collapse; background-color: transparent ">
+                            <tr>
+                                <td style="text-align: center; font-size: 18px; border: 1px solid black;">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Conformité_Européenne_%28logo%29.svg" style="width: 120px; margin-top: 35px; margin-bottom: 35px;"/>
+                                        <br/>2354 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black; line-height: 1.5; padding: 35px 0;">
+                                    YENA DEMİR ÇELİK SAN. VE TiC. LTD. STİ.
+                                    <br/>Factory: İTOSB Recep Bilal Hancı Caddesi No:9
+                                    <br/>Tuzla / İSTANBUL
+                                    <br/>2023
+                                    <br/>
+                                    <br/>2354-CPR-1090-1-TUVNORD-2242634585.23.0033.R00
+                                    <br/>Client Reference No: <t t-esc="o.order_id.customer_reference"/> (YENA - <t t-esc="o.order_id.project_purchase.name"/>)
+                                    <br/>PERFORM NO: YENA-<t t-esc="o_index + 1"/>-H1
+                                    <br/>Product : <t t-esc="o.product_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black; line-height: 1.5; padding: 35px 0;">
+                                    EN1090-1
+                                    <br/>Intended use:
+                                    <br/>All Types of Load Bearing Structures (Steel Anchor Plates)
+                                </td>
+                            </tr>
+                            <tr style="border: none;">
+                                <td style="border: 1px solid black;">
+                                    <table style="width: 100%; border: none;">
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Tolerances on dimensions and shape:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                EN 1090-2
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Weldability:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                S235JR-J2, S355JR-J2 acc. to EN 10025-2
+                                            </td>
+                                        </tr>
+                                        <tr style="border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black;">
+                                                Fracture toughness/impact resistance and Load bearing capacity:
+                                            </td>
+                                            <td style="width: 50%; border: none;">
+                                                <span style="display: block;">For JR (27J at room temperature) EN 1090-2</span>
+                                                <span style="display: block;">For J0 (27J at 0°C) EN 1090-2</span>
+                                                <span style="display: block;">For J2 (27J at -20°C) EN 1090-2</span>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Fatigue strength:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                EN 1090-2
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Resistance to fire :
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                EN 1090-2
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Reaction to fire:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                EN 1090-2
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Release of cadmium and its compounds
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                NPD
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Radioactivity:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                NPD
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Durability (against corrosion):
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                Surface galvanised acc. to EN ISO 1461
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Structural Characteristics Design:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                NPD
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 25px; border: none;">
+                                            <td style="width: 50%; border: none; border-right: 1px solid black; vertical-align: middle;">
+                                                Manufacturing:
+                                            </td>
+                                            <td style="width: 50%; border: none; vertical-align: middle;">
+                                                According to EN 1090-2 execution class EXC.2
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
