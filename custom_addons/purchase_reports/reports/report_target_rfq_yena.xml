@@ -59,7 +59,8 @@
                                             <span> </span>
                                             <br />
                                             <span t-if="o.company_id.id == 2">VAT No: NL838751355B01</span>
-                                            <span t-if="o.company_id.id != 2"> VAT No: <span t-field="o.company_id.vat" />
+                                            <span t-if="o.company_id.id != 2"> VAT No: <span
+                                                    t-field="o.company_id.vat" />
                                             </span>
                                         </div>
                                     </td>
@@ -121,7 +122,7 @@
                                         <th class="text-center" style="padding: 8px; border: none;">
                                             Teslim Tarihi
                                         </th>
-                                    </t>                                        
+                                    </t>
                                 </tr>
                             </thead>
                             <tbody class="sale_tbody" style="border: none;">
@@ -162,8 +163,10 @@
                                                 <span t-field="line.price_subtotal" />
                                             </td>
                                             <t t-if="line.delivery_date">
-                                                <td class="text-center" style="vertical-align: middle; border: none;">
-                                                    <span t-field="line.delivery_date" t-options="{'format': 'dd/MM/yyyy'}" />
+                                                <td class="text-center"
+                                                    style="vertical-align: middle; border: none;">
+                                                    <span t-field="line.delivery_date"
+                                                        t-options="{'format': 'dd/MM/yyyy'}" />
                                                 </td>
                                             </t>
                                         </t>
@@ -183,38 +186,48 @@
                                     </tr>
 
                                     <!-- Ürün Detayları-->
-                                    <t t-if="not line.display_type and line.product_id.description_purchase">
+                                    <t
+                                        t-if="not line.display_type and line.product_id.description_purchase">
                                         <tr style="border: none; line-height: 1.0; height: auto;">
-                                            <td class="text-left" style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
+                                            <td class="text-left"
+                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
                                                 Ürün Tanımı
                                             </td>
-                                            <td colspan="99" class="text-left" style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span t-field="line.product_id.description_purchase"/>
+                                            <td colspan="99" class="text-left"
+                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
+                                                :<span
+                                                    t-field="line.product_id.description_purchase" />
                                             </td>
                                         </tr>
-                                    </t>                                        
+                                    </t>
                                     <t t-if="not line.display_type and line.product_id.coating">
                                         <tr style="border: none; line-height: 1.0; height: auto;">
-                                            <td class="text-left" style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold; ">
+                                            <td class="text-left"
+                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold; ">
                                                 Kaplama
                                             </td>
-                                            <td colspan="99" class="text-left" style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span t-field="line.product_id.coating"/>
+                                            <td colspan="99" class="text-left"
+                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
+                                                :<span t-field="line.product_id.coating" />
                                             </td>
                                         </tr>
                                     </t>
                                     <t t-if="not line.display_type and line.product_id.weight">
-                                        <tr style="border: none; border-bottom: 1px solid black; line-height: 1.0; height: auto;">
-                                            <td class="text-left" style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
+                                        <tr
+                                            style="border: none; border-bottom: 1px solid black; line-height: 1.0; height: auto;">
+                                            <td class="text-left"
+                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
                                                 Teorik Ağırlık
                                             </td>
-                                            <td colspan="99" class="text-left" style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span t-field="line.product_id.weight"/>
+                                            <td colspan="99" class="text-left"
+                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
+                                                :<span t-field="line.product_id.weight" />
                                             </td>
                                         </tr>
                                     </t>
 
-                                    <t t-if="current_section and (line_last or o.order_line[line_index + 1].display_type == 'line_section')">
+                                    <t
+                                        t-if="current_section and (line_last or o.order_line[line_index + 1].display_type == 'line_section')">
                                         <tr class="is-subtotal text-right" style="border: none;">
                                             <td colspan="4"
                                                 style="text-align:right; border: none;">
@@ -228,11 +241,12 @@
                                     </t>
                                 </t>
                                 <tr style="border: none;">
-                                    <td style="text-align:right; font-weight:bold; padding: 8px; border: none;" colspan="99"> 
-                                        Hedef Toplam Fiyat (Exc. VAT): 
+                                    <td style="text-align:right; font-weight:bold; padding: 8px; border: none; vertical-align: middle;" colspan="99"> 
+                                        Total (Exc. VAT): 
                                         <span t-esc="o.amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
                                     </td>
                                 </tr>
+
                             </tbody>
                         </table>
                         <span style="font-size:10pt">

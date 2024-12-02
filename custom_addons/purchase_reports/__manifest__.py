@@ -9,7 +9,7 @@
     This module provides custom print reports for various Odoo models.
     """,
     'website': 'https://www.yenaengineering.nl',
-    'depends': ['base', 'purchase', 'yena_external_layout'],
+    'depends': ['base', 'purchase', 'yena_external_layout', 'order_flow'],
     'data': [
         'reports/report_action.xml',
         'reports/report_purchase_yena.xml',
