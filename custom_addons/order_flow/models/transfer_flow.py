@@ -25,10 +25,9 @@ class Picking(models.Model):
         string="Project Number", 
         store=True)
 
-    """Bunlar ne?
+
     sale_id=fields.Many2one("sale.order",string="Sale Order")
     purchase_id=fields.Many2one("purchase.order",string="Purchase Order")
-    """
     """Bu Ne?
     sequence_code = fields.Char(string='Sequence Code', related='picking_type_id.sequence_code', store=True)
     """

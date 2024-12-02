@@ -51,7 +51,7 @@
                     <field name="delivery_date" string="S-Required Delivery Date"/>
                 </xpath>
 
-                <xpath expr="//field[@name='effective_date']" position="after">
+                <xpath expr="//field[@name='date_planned']" position="after">
                     <field name="customer_reference" required="1" string="C-Reference No"/>
                     <field name="project_purchase" string="Project Number" required="1"/>
                     <field name="tags" widget="many2many_tags" string="Tags"/>
