@@ -34,16 +34,17 @@
                                             İTOSB Recep Bilal Hancı Caddesi No:9 <br />Tuzla /
                                             İSTANBUL <br />2023 <br />
                                     <br />
-                                            2354-CPR-1090-1-TUVNORD-2242634585.23.0033.R00 <!--
-                                            Koşullu olarak gösterilen "Client Reference No"
-                                            satırı -->
-                                            <!-- <t t-if="batch.order_id.customer_reference and
-                                            batch.order_id.project_purchase.name">
-                                                <br/>Client Reference No: <t t-esc="batch.order_id.customer_reference"/> (YENA - <t
-                                            t-esc="batch.order_id.project_purchase.name"/>)
-                                            </t> -->
+                                            2354-CPR-1090-1-TUVNORD-2242634585.23.0033.R00 <t
+                                                t-if="picking.sale_id">
+                                                <br />Client Reference No: <t
+                                                    t-esc="picking.sale_id.customer_reference" />
+                                            (YENA - <t t-esc="picking.sale_id.name" />) </t>
+                                            <t
+                                                t-elif="picking.purchase_id">
+                                                <br />Client Reference No: <t
+                                                    t-esc="picking.purchase_id.customer_reference" />
+                                            (YENA - <t t-esc="picking.purchase_id.name" />) </t>
 
-                                            <!-- PERFORM NO satırı -->
                                             <t
                                                 t-if="move_index is not None">
                                                 <br />PERFORM NO: YENA-<t t-esc="move_index + 1" />
