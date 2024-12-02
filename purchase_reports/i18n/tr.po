@@ -1,0 +1,937 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-02 07:01+0000\n"
+"PO-Revision-Date: 2024-12-02 07:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_reports
+#: model:ir.actions.report,print_report_name:purchase_reports.action_report_purchase_ce
+msgid "'CE - %s' % (object.name)"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,print_report_name:purchase_reports.action_report_purchase_target_rfq
+msgid "'Hedef Teklif Talebi - %s' % (object.name)"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,print_report_name:purchase_reports.action_report_purchase_order
+msgid "'Satın Alma Siparişi - %s' % (object.name)"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,print_report_name:purchase_reports.action_report_purchase_rfq
+msgid "'Teklif Talebi - %s' % (object.name)"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,print_report_name:purchase_reports.action_report_purchase_call_off
+msgid "'Çağrı Mektubu - %s' % (object.name)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"(YENA\n"
+"                                    -"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "(YENA -"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid ""
+")\n"
+"                                    <br/>PERFORM NO: YENA-"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+") <br/> PERFORM\n"
+"                                    NO: YENA-"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid ""
+"-H1\n"
+"                                    <br/>Product :"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "-H1 <br/> Product :"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"31.01.2020<br/>\n"
+"                        <strong>EBRU\n"
+"                        ÇELİKTEN</strong><br/> Kalite Müdürü"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": 2354"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": 2354-CPR-1090"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+": All Types of Load Bearing Structures (Steel Anchor\n"
+"                                                Plates)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": EN 1090-1:2009+A1"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+": Her Türlü Yük Taşıyan Yapılar (Çelik Ankraj\n"
+"                                                Plakaları)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": ITOSB Recep Bilal Hancı Cad. No:9"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": Not applicable"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": Sistem 2+"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": System 2+"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+": TUV NORD Turkey Teknik Kontrol ve Belgelendirme\n"
+"                                                A.Ş."
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": Uygulanamaz"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": YENA DEMİR ÇELİK SAN. TİC. LTD. ŞTİ."
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ": İTOSB Recep Bilal Hancı Cad. No:9"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+":EXC2 EN 1090-2 Structural Steel Construction\n"
+"                                                Components and Elements"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+":EXC2 EN 1090-2 Yapısal Çelik Konstrüksiyon\n"
+"                                                Bileşenleri ve Elemanları"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>Document Date:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>Hazırlayan:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>Teslim Şekli:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>YENA Request No:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>Yetkili:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "<b>Ödeme Şekli:</b>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "<br/>2354"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid ""
+"<span style=\"display: block;\">For JR (27J at room temperature) EN 1090-2</span>\n"
+"                                                <span style=\"display: block;\">For J0 (27J at 0°C) EN 1090-2</span>\n"
+"                                                <span style=\"display: block;\">For J2 (27J at -20°C) EN 1090-2</span>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid ""
+"<span style=\"font-size:10pt\">\n"
+"                            <b>\n"
+"                                <u>Notlar:</u>\n"
+"                            </b>\n"
+"                        </span>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "<span>, </span>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+msgid "<strong>Subtotal</strong>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"<strong>Uygun Teknik Belgeler\n"
+"                        ve/veya Özel Teknik Belgeler</strong> : Uygulanamaz<br/>\n"
+"                        <strong>Appropriate\n"
+"                        Technical Documentation and / or Special Technical Documents</strong> : Not\n"
+"                        applicable"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "<strong>Üretici adına</strong>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "AVCP sistemi/sistemleri"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "AVCP system/systems"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "According to EN 1090-2 execution class EXC.2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Adet"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Authorized representative"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Beyan\n"
+"                                        Edilen Performanslar<br/>\n"
+"                            <em>Declared Performances</em>"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+msgid "Birim Fiyat"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+msgid "Blanket Agreement No"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Boyut ve şekil\n"
+"                                        toleransları/Size and Shape Tolerances"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+msgid "CALL OFF LETTER"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_ce
+msgid "CE Document"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_call_off
+msgid "Call Off"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Coating:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Contact:"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_dop
+msgid "DOP Document"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Darbe Direnci/Impact\n"
+"                                        Resistance"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Dayanıklılık/Durability"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Delivery Date"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Delivery Terms:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Document Date:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Drawing No"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Durability (against corrosion):"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.2 -\n"
+"                                        5.3"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.3 -\n"
+"                                        5.4"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.4 -\n"
+"                                        5.5"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.5.1 -\n"
+"                                        4.5.2 - 5.6.2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.5.1 -\n"
+"                                        4.5.3 - 5.6.2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.5.1 -\n"
+"                                        4.5.4 - 5.7"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "EN 1090-1 Madde 4.5.5"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.6 -\n"
+"                                        5.8"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.7 -\n"
+"                                        5.9"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.8 -\n"
+"                                        5.10"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"EN 1090-1 Madde 4.9 -\n"
+"                                        5.11"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "EN 1090-2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "EN 1990"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid ""
+"EN1090-1\n"
+"                                    <br/>Intended use:\n"
+"                                    <br/>All Types of Load Bearing Structures (Steel Anchor Plates)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Fabrika Üretim kontrolü Uygunluk Belge Numarası"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Factory Production Control Compliance Document\n"
+"                                                Number"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Fatigue strength:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"For JR (27J at room\n"
+"                                        temperature) EN 1090-2<br/> For J0 (27J at 0°C) EN 1090-2<br/> For J2\n"
+"                                        (27J at -20°C) EN 1090-2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Fracture toughness/impact resistance and Load bearing capacity:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Harmonize teknik\n"
+"                                        standart/ Harmonised technical specification"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Harmonized Standard"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Intended Use"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Kadmiyum ve\n"
+"                                        bileşiklerinin salınımı/Release of cadmium and its compounds"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Kaplama:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Kaynak\n"
+"                                        edilebilirlik/Weldability"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Kullanılabilirlik Sınır\n"
+"                                        Durumunda Şekil Değiştirme/Shape Change in Availability"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Kullanım amacı"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Kırılma Tokluğu/Fracture\n"
+"                                        toughness"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Logo"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Manufacturer"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Manufacturing:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "NPD"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Notes:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Notified Body"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Notified BodyNumber"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Onaylanmış Kuruluş"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Onaylanmış Kuruluş No"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"PERFORMANS BEYANI <br/>DECLARATION OF PERFORMANCE <br/>Yapı\n"
+"                                    Malzemeleri Yönetmeliği 305/2011/AB <br/>Regulation 305/2011/EU <br/>Client\n"
+"                                    Reference No :"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Payment Terms:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Performans/Performance"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Prepared By:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Product Description:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Product type"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Product/Project code"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Quantity"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Radioactivity:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Radyoaktivite/Radioactivity"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Reaction to fire:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Release of cadmium and its compounds"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_rfq
+msgid "Request for Quotation"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Resistance to fire :"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "S235JR-J2, S355JR-J2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "S235JR-J2, S355JR-J2 acc. to EN 10025-2"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+msgid "SATIN ALMA SİPARİŞİ"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Structural Characteristics Design:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Subtotal"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Surface galvanised acc. to EN ISO 1461"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "TEKLİF TALEBİ"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Target Amount (Excl. VAT)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Target Price Request for Quotation"
+msgstr ""
+
+#. module: purchase_reports
+#: model:ir.actions.report,name:purchase_reports.action_report_purchase_target_rfq
+msgid "Target Request for Quotation"
+msgstr "dsads"
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Target Total Price (Excl. VAT):"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Target Unit Price"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Temel\n"
+"                                        karakteristikler/Essential characteristics"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Teorik Ağırlık:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Teslim Tarihi"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Theoretical Weight:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Tolerances on dimensions and shape:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Toplam Ağırlık (kg)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+msgid "Total (Exc. VAT):"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "Total Weight (kg)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+msgid "Tutar (KDV Hariç)"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Uyumlaştırılmış Standart"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "VAT No:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "VAT No: NL838751355B01"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid "Weldability:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_ce
+msgid ""
+"YENA DEMİR ÇELİK SAN. VE TiC. LTD. STİ.\n"
+"                                    <br/>Factory: İTOSB Recep Bilal Hancı Caddesi No:9\n"
+"                                    <br/>Tuzla / İSTANBUL\n"
+"                                    <br/>2023\n"
+"                                    <br/>\n"
+"                                    <br/>2354-CPR-1090-1-TUVNORD-2242634585.23.0033.R00\n"
+"                                    <br/>Client Reference No:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_call_off
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_target_rfq_document
+msgid "YENA Request No:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yangına direnç/Fire\n"
+"                                        Resistance"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yangına tepki/Reaction\n"
+"                                        to fire"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Yetkili Temsilci"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yorulma Dayanımı/fatigue\n"
+"                                        strength"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yukarıda\n"
+"                        tanımlanan ürünün performansı, belirtilen performans gruplarına uygundur. Bu\n"
+"                        performans beyanı, 305/2011 sayılı Tüzüğe (AB) göre yukarıda belirtilen\n"
+"                        üreticinin sorumluluğundadır.<br/> The performance of the product described\n"
+"                        above is suitable for the specified performance groups. This declaration of\n"
+"                        performance is the responsibility of the aforementioned manufacturer\n"
+"                        according to Regulation (EU) 305/2011."
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yük Taşıma\n"
+"                                        kapasitesi/Load Bearing Capacity"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid ""
+"Yüzey hazırlığı, boya EN\n"
+"                                        ISO 12944-5 Corrosion Class Grade 3. Surface painted acc. to EN ISO\n"
+"                                        12944-5"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Çizim No"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_purchase
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_rfq
+msgid "Ürün Tanımı:"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Ürün Tipi / Türü"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "Ürün/ Proje kodu"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "İmalatçı"
+msgstr ""
+
+#. module: purchase_reports
+#: model_terms:ir.ui.view,arch_db:purchase_reports.report_dop
+msgid "– YENA-"
+msgstr ""

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_purchase_alperen_document">
+            <t t-call="reports_print.external_layout_yena2">
+                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                <h1 style="text-align:center;">PURCHASE ORDER</h1>
+                <br />
+                <div class="page">
+                    <table style="font-size:11pt; width: 100%;">
+                        <tbody>
+                            <tr>
+                                <!-- Firma Bilgileri -->
+                                <td style="width:45%; padding-left: 10px; vertical-align: top;">
+                                    <img t-if="o.company_id.logo"
+                                        t-att-src="image_data_uri(o.company_id.logo)"
+                                        style="max-height: 120px;" alt="Logo" />
+                                    <div style="margin-top: 20px;">
+                                        <strong>
+                                            <span t-field="o.company_id.name" />
+                                        </strong>
+                            <br />
+                            <span
+                                            t-field="o.company_id.street" /><br />
+                            <span
+                                            t-field="o.company_id.street2" /><br />
+                            <span
+                                            t-field="o.company_id.city" />
+                            <span> </span>
+                            <span
+                                            t-field="o.company_id.state_id" />
+                            <span> </span>
+                            <span
+                                            t-field="o.company_id.zip" />
+                                <span> </span>
+                                  <br /> VAT
+                                        No: <span t-field="o.company_id.vat" />
+                            <br />
+                                    </div>
+                                </td>
+                                <!-- Müşteri Bilgileri -->
+                                <td style="width:45%; padding-right: 10px; vertical-align: top;">
+                                    <span t-field="o.partner_id" />
+                                    <br />
+                                    <span t-field="o.partner_id.street" />
+                                    <span>, </span>
+                                    <span t-field="o.partner_id.zip" />
+                                    <span> </span>
+                                    <span t-field="o.partner_id.city" />
+                                    <br />
+                                    <span t-field="o.partner_id.country_id.name" />
+                                    <br />
+                                    <!-- <t t-if="o.partner_id.tax_office_id and o.partner_id.vat">
+                                            <span t-field="o.partner_id.tax_office_id" />
+                                            <br />
+                                            <span t-field="o.partner_id.vat" />
+                                            <br />
+                                        </t> -->
+                                    <!-- Diğer Bilgiler -->
+                                    <div style="margin-top: 20px;">
+                                        <br />
+                                        <br />
+                                        <div t-if="o.name">
+                                            <b>YENA Request No:</b>
+                                            <span t-field="o.name" />
+                                        </div>
+                                        <t t-set="today" t-value="datetime.datetime.now()" />
+                                        <div>
+                                            <b>Document Date:</b>
+                                            <span t-esc="today.strftime('%d/%m/%Y')" />
+                                        </div>
+                                        <div t-if="o.contact_id">
+                                            <b>Yetkili:</b>
+                                            <span t-field="o.contact_id" />
+                                        </div>
+                                        <div t-if="o.incoterm_id">
+                                            <b>Teslim Şekli:</b>
+                                            <span t-field="o.incoterm_id" />
+                                        </div>
+                                        <div t-if="o.delivery_date">
+                                            <b>Teslim Tarihi:</b>
+                                            <span t-field="o.delivery_date"
+                                                t-options="{'format': 'dd/MM/yyyy'}" />
+                                        </div>
+                                        <div t-if="o.payment_term_id">
+                                            <b>Ödeme Şekli:</b>
+                                            <span t-field="o.payment_term_id" />
+                                        </div>
+                                        <div t-if="o.user_id">
+                                            <b>Prepared by:</b>
+                                            <span t-field="o.user_id" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table class="table table-sm o_main_table" style="font-size:10pt">
+                        <thead>
+                            <tr style="text-align:center">
+                                <!-- Drawing No -->
+                                <t t-set="show_drawing_no"
+                                    t-value="any(line.product_id for line in o.order_line)" />
+                                <t t-if="show_drawing_no">
+                                    <th name="th_drawingno" class="text-center">
+                                        <strong>Drawing No</strong>
+                                    </th>
+                                </t>
+                                <!-- Coating -->
+                                <t t-set="show_coating"
+                                    t-value="any(line.coating for line in o.order_line)" />
+                                <t t-if="show_coating">
+                                    <th name="th_coating" class="text-center">
+                                        <strong>Coating</strong>
+                                    </th>
+                                </t>
+                                <!-- Qty -->
+                                <t t-set="show_quantity"
+                                    t-value="any(line.product_qty for line in o.order_line)" />
+                                <t t-if="show_quantity">
+                                    <th name="th_quantity" class="text-center">
+                                        <strong>Qty</strong>
+                                    </th>
+                                </t>
+                                <!-- Total Weight -->
+                                <t t-set="show_total_weight"
+                                    t-value="any(line.totalweight for line in o.order_line)" />
+                                <t t-if="show_total_weight">
+                                    <th name="th_totalweight" class="text-center">
+                                        <strong>Total Weight (kg)</strong>
+                                    </th>
+                                </t>
+                                <!-- Unit Price -->
+                                <t t-set="show_unit_price"
+                                    t-value="any(line.price_unit for line in o.order_line)" />
+                                <t t-if="show_unit_price">
+                                    <th name="th_price_unit" class="text-center">
+                                        <strong>Unit Price</strong>
+                                    </th>
+                                </t>
+                                <!-- Amount -->
+                                <t t-set="show_amount"
+                                    t-value="any(line.price_subtotal for line in o.order_line)" />
+                                <t t-if="show_amount">
+                                    <th name="th_amount" class="text-center">
+                                        <strong>Amount</strong>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="current_subtotal" t-value="0" />
+                            <t t-foreach="o.order_line" t-as="line">
+                                <t t-set="current_subtotal"
+                                    t-value="current_subtotal + line.price_subtotal"
+                                    groups="account.group_show_line_subtotals_tax_excluded" />
+                                <t t-set="current_subtotal"
+                                    t-value="current_subtotal + line.price_total"
+                                    groups="account.group_show_line_subtotals_tax_included" />
+                                <tr
+                                    t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type">
+                                        <!-- Drawing No -->
+                                        <t t-if="show_drawing_no">
+                                            <td id="drawing" class="text-center">
+                                                <span t-field="line.product_id" />
+                                            </td>
+                                        </t>
+                                        <!-- Coating -->
+                                        <t t-if="show_coating">
+                                            <td class="text-center">
+                                                <span t-field="line.coating" />
+                                            </td>
+                                        </t>
+                                        <!-- Qty -->
+                                        <t t-if="show_quantity">
+                                            <td class="text-center">
+                                                <span t-field="line.product_qty" />
+                                                <span t-field="line.product_uom.name"
+                                                    groups="uom.group_uom" />
+                                            </td>
+                                        </t>
+                                        <!-- Total Weight -->
+                                        <t t-if="show_total_weight">
+                                            <td class="text-center">
+                                                <span t-field="line.totalweight" />
+                                            </td>
+                                        </t>
+                                        <!-- Unit Price -->
+                                        <t t-if="show_unit_price">
+                                            <td class="text-center">
+                                                <span t-field="line.price_unit"
+                                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}" />
+                                            </td>
+                                        </t>
+                                        <!-- Amount -->
+                                        <t t-if="show_amount">
+                                            <td class="text-center">
+                                                <span t-field="line.price_subtotal"
+                                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}" />
+                                            </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                                <t
+                                    t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section')">
+                                    <tr class="is-subtotal text-end">
+                                        <td colspan="99" id="subtotal">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span t-esc="current_subtotal"
+                                                t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div id="total" class="row justify-content-end">
+                        <div class="col-4">
+                            <table class="table table-sm">
+                                <tr>
+                                    <td>
+                                        <b>Total (Exc. Vat):</b>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o.currency_id.symbol" />
+                                        <span t-esc="o.amount_untaxed" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <span style="font-size:10pt">
+                        <b>
+                            <u>Notes:</u>
+                        </b>
+                    </span>
+                    <span style="font-size:8pt" t-field="o.notes" />
+                    <div class="oe_structure" />
+                </div>
+
+
+                <div class="footer o_standard_footer" style="text-align:center;font-size:11px">
+                    <ul class="list-inline mb4" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <t t-if="o.company_id.id == 2">
+                        <div>
+                            YENA ENGINEERING BV World Trade Center, Beursplein 37, 3011 AA
+                            Rotterdam, The Netherlands
+                        </div>
+                        <div>
+                            P:+31 (0) 10 84 54 617 * yena@yenaengineering.nl *
+                            www.yenaengineering.nl
+                        </div>
+                        <div>
+                            BANK NAME: BUNQ * IBAN: NL26BUNQ2206607298 * BANK Swift Code:
+                            BUNQNL2AXXX
+                        </div>
+                        <div class="text-muted"> Page: <span class="page" /> / <span
+                                class="topage" />
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div><!--Genel
+                        Şirket Adresi, Şehir, Ülke-->
+                        </div>
+                        <div><!--Telefon
+                        ve E-posta Bilgileri-->
+                        </div>
+                        <div class="text-muted"> Page: <span class="page" /> / <span
+                                class="topage" />
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </template>
+        <template id="report_purchase_alperen">
+            <t t-name="reports_print.report_purchase_alperen">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="reports_print.report_purchase_alperen_document"
+                            t-lang="o.partner_id.lang" />
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

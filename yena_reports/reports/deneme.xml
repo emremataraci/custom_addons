@@ -1,0 +1,172 @@
+<odoo>
+    <template id="external_layout_yena">
+        <t t-name="yena_reports.external_layout_yena">
+            <t t-if="not o" t-set="o" t-value="doc" />
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id" />
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()" />
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+            </t>
+            <t t-call="yena_external_layout.external_layout_yena_standard">
+                <t t-out="0" />
+            </t>
+        </t>
+    </template>
+    <template id="external_layout_yena_standard">
+        <t t-name="yena_reports.external_layout_yena_standard">
+            <t t-name="yena_reports.external_layout_standard_alperen">
+                <div
+                    t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{ 'o_layout_background' if company.layout_background in ['Geometric', 'Custom'] else '' }}"
+                    t-att-data-oe-model="o and o._name"
+                    t-att-data-oe-id="o and o.id"
+                    t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <div class="pt-1" />
+                    <t t-out="0" />
+                </div>
+
+                <div class="footer o_standard_footer o_company_#{company.id}_layout"
+                    style="text-align:center;font-size:11px">
+                    <div class="footer-content">
+                        <t t-if="report_type == 'pdf'">
+                            <div>
+                                <t t-esc="company.name" /> 
+                                <t t-esc="company.street" /> 
+                                <t
+                                    t-esc="company.street2" /> 
+                                <t t-esc="company.city" /> / <t
+                                    t-esc="company.country_id.name" />
+                            </div>
+                            <div> T:<t t-esc="company.phone" /> * yena@yenaengineering.nl * <t
+                                    t-esc="company.website" />
+                            </div>
+                            <div class="text-muted"> Page: <span class="page" /> / <span
+                                    class="topage" />
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_purchase">
+        <t t-name="yena_reports.report_purchase">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="yena_reports.external_layout_alperen">
+                        <style>
+                            * {
+                            font-family: "DejaVu Sans", Arial, sans-serif !important;
+                            }
+                        </style>
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <h1 style="text-align:center;">PURCHASE ORDER</h1>
+                        <div class="page">
+                            <table style="font-size:11pt; width: 100%; border-spacing: 0;">
+                                <tbody>
+                                    <!-- Logo ve Müşteri Bilgileri -->
+                                    <tr>
+                                        <!-- Logo -->
+                                        <td style="width:50%; padding-left: 10px; vertical-align: top;">
+                                            <img t-if="o.company_id.logo"
+                                                t-att-src="image_data_uri(o.company_id.logo)"
+                                                style="max-height: 120px;" alt="Logo" />
+                                        </td>
+                                        <!-- Müşteri Bilgileri -->
+                                        <td style="width:50%; padding-right: 10px; vertical-align: top;">
+                                            <span t-field="o.partner_id" />
+                                            <br />
+                                            <span t-field="o.partner_id.street" />
+                                            <span>, </span>
+                                            <span t-field="o.partner_id.zip" />
+                                            <span> </span>
+                                            <span t-field="o.partner_id.city" />
+                                            <br />
+                                            <span t-field="o.partner_id.country_id.name" />
+                                        </td>
+                                    </tr>
+                            
+                                    <!-- Şirket Bilgileri ve Teklif Biglileri -->
+                                    <tr>
+                                        <!-- Şirket Bilgileri -->
+                                        <td style="width:50%; padding-left: 10px; vertical-align: top;">
+                                                        <div style="margin-top: 5px;">
+                                                <strong>
+                                                    <span t-field="o.company_id.name" />
+                                                </strong>
+                                                <br />
+                                                <span t-field="o.company_id.street" /><br />
+                                                <span t-field="o.company_id.street2" /><br />
+                                                <span t-field="o.company_id.city" />
+                                                <span> </span>
+                                                <span t-field="o.company_id.state_id" />
+                                                <span> </span>
+                                                <span t-field="o.company_id.zip" />
+                                                <span> </span>
+                                                <br />
+                                                VAT No: <span t-field="o.company_id.vat" />
+                                            </div>
+                                        </td>
+                                        <!-- Teklif Bilgileri -->
+                                        <td style="width:50%; padding-left: 0px; vertical-align: top;">
+                                            <div style="margin-top: 5px;">
+                                                <div t-if="o.name">
+                                                    <b>YENA Request No:</b>
+                                                    <span t-field="o.name" />
+                                                </div>
+                                                <t t-set="today" t-value="datetime.datetime.now()" />
+                                                <div>
+                                                    <b>Document Date:</b>
+                                                    <span t-esc="today.strftime('%d/%m/%Y')" />
+                                                </div>
+                                                <div t-if="o.contact_id">
+                                                    <b>Yetkili:</b>
+                                                    <span t-field="o.contact_id.name" />
+                                                </div>
+                                                <div t-if="o.incoterm_id">
+                                                    <b>Teslim Şekli:</b>
+                                                    <span t-field="o.incoterm_id" />
+                                                </div>
+                                                <div t-if="o.delivery_date">
+                                                    <b>Teslim Tarihi:</b>
+                                                    <span t-field="o.delivery_date" t-options="{'format': 'dd/MM/yyyy'}" />
+                                                </div>
+                                                <div t-if="o.payment_term_id">
+                                                    <b>Ödeme Şekli:</b>
+                                                    <span t-field="o.payment_term_id" />
+                                                </div>
+                                                <div t-if="o.user_id">
+                                                    <b>Prepared by:</b>
+                                                    <span t-field="o.user_id" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_purchase_deneme" model="ir.actions.report">
+        <field name="name">Purchase</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">yena_reports.report_purchase_order</field>
+        <field name="report_file">yena_reports.report_purchase_order</field>
+        <field name="print_report_name">'Purchase Report - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

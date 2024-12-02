@@ -1,0 +1,457 @@
+<odoo>
+    <template id="report_dop_batch">
+        <t t-call="web.html_container">
+            <style>
+                * {
+                font-family: "DejaVu Sans", Arial, sans-serif !important;
+                }
+            </style>
+            <!-- Her 'stock.picking.batch' için döngü -->
+            <t t-foreach="docs" t-as="batch" t-foreach-index="batch_index">
+                <!-- Batch içindeki transferler -->
+                <t t-foreach="batch.picking_ids" t-as="picking" t-foreach-index="picking_index">
+                    <!-- Transfer içindeki hareketler -->
+                    <t t-foreach="picking.move_line_ids" t-as="move_line"
+                        t-foreach-index="move_index">
+                        <t t-call="yena_external_layout.external_layout_without_footer">
+                            <div class="page"
+                                style="background-color: transparent; page-break-after: always;">
+                                <table
+                                    style="width: 100%; border-collapse: collapse; background-color: transparent;">
+                                    <tr>
+                                        <td
+                                            style="text-align: center; border: 1px solid black; line-height: 1.5; padding: 10px 0;">
+                                            PERFORMANS BEYANI <br />DECLARATION OF PERFORMANCE <br />Yapı
+                                            Malzemeleri Yönetmeliği 305/2011/AB <br />Regulation
+                                            305/2011/EU <br />Batch Reference No : <t
+                                                t-esc="batch.name" /> <br />Transfer Reference No : <t
+                                                t-esc="picking.name" /><br /> PERFORM NO: YENA-<t
+                                                t-esc="batch_index + 1" />-H1 <br /> Product : <t
+                                                t-esc="move_line.product_id.name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid black;">
+                                            <table
+                                                style="width: 100%; border: none; border-collapse: collapse;">
+                                                <!-- Ürün Tipi / Türü -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; margin-bottom: 10px;">
+                                                        Ürün Tipi / Türü
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        :EXC2 EN 1090-2 Yapısal Çelik Konstrüksiyon
+                                                        Bileşenleri ve Elemanları
+                                                    </td>
+                                                </tr>
+                                                <!-- Product type -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Product type
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        :EXC2 EN 1090-2 Structural Steel
+                                                        Construction
+                                                        Components and Elements
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Kullanım amacı -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Kullanım amacı
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : Her Türlü Yük Taşıyan Yapılar (Çelik
+                                                        Ankraj
+                                                        Plakaları)
+                                                    </td>
+                                                </tr>
+                                                <!-- Intended Use -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Intended Use
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : All Types of Load Bearing Structures
+                                                        (Steel Anchor
+                                                        Plates)
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Ürün/ Proje kodu -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Ürün/ Proje kodu
+                                                    </td>
+                                                    <td style="width: 70%; border: none;"> : <t
+                                                            t-esc="move_line.product_id.name" /> –
+                                                        YENA-<t
+                                                            t-esc="batch.name" />
+                                                    </td>
+                                                </tr>
+                                                <!-- Product/Project code -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Product/Project code
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : <t t-esc="move_line.product_id.name" /> –
+                                                        YENA-<t
+                                                            t-esc="batch.name" />
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- İmalatçı -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        İmalatçı
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : YENA DEMİR ÇELİK SAN. TİC. LTD. ŞTİ.
+                                                    </td>
+                                                </tr>
+                                                <!-- Manufacturer -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Manufacturer
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : İTOSB Recep Bilal Hancı Cad. No:9
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Yetkili Temsilci -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Yetkili Temsilci
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : Uygulanamaz
+                                                    </td>
+                                                </tr>
+                                                <!-- Authorized representative -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Authorized representative
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : Not applicable
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- AVCP sistemi/sistemleri -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        AVCP sistemi/sistemleri
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : Sistem 2+
+                                                    </td>
+                                                </tr>
+                                                <!-- AVCP system/systems -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        AVCP system/systems
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : System 2+
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Uyumlaştırılmış Standart -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Uyumlaştırılmış Standart
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : EN 1090-1:2009+A1
+                                                    </td>
+                                                </tr>
+                                                <!-- Harmonized Standard -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Harmonized Standard
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : EN 1090-1:2009+A1
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Onaylanmış Kuruluş -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Onaylanmış Kuruluş
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : TUV NORD Turkey Teknik Kontrol ve
+                                                        Belgelendirme
+                                                        A.Ş.
+                                                    </td>
+                                                </tr>
+                                                <!-- Notified Body -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Notified Body
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : TUV NORD Turkey Technical Control and
+                                                        Certification Inc.
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Onaylanmış Kuruluş No -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Onaylanmış Kuruluş No
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : 2354
+                                                    </td>
+                                                </tr>
+                                                <!-- Notified Body Number -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black; font-style: italic;">
+                                                        Notified Body Number
+                                                    </td>
+                                                    <td
+                                                        style="width: 70%; font-style: italic; border: none;">
+                                                        : 2354
+                                                    </td>
+                                                </tr>
+                                                <!-- Boş Satır -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td style="width: 30%; border: none;"></td>
+                                                    <td style="width: 70%; border: none;"></td>
+                                                </tr>
+                                                <!-- Fabrika Üretim kontrolü Uygunluk Belge Numarası -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Fabrika Üretim kontrolü Uygunluk Belge
+                                                        Numarası
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : 2354-CPR-1090
+                                                    </td>
+                                                </tr>
+                                                <!-- Factory Production Control Compliance Document
+                                                Number -->
+                                                <tr style="height: 25px; border: none;">
+                                                    <td
+                                                        style="width: 30%; border: none; border-right: 1px solid black;">
+                                                        Factory Production Control Compliance
+                                                        Document Number
+                                                    </td>
+                                                    <td style="width: 70%; border: none;">
+                                                        : 2354-CPR-1090
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+            <!-- "Beyan Edilen Performanslar" sayfasını döngüden sonra ekliyoruz -->
+            <t t-call="yena_external_layout.external_layout_without_footer">
+                <div class="page" style="background-color: transparent; page-break-after: always;">
+                    <table
+                        style="width: 100%; text-align: center; border: 1px solid black; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="border: 1px solid black; padding: 10px;">
+                                    Beyan Edilen Performanslar<br />
+                                    <em>Declared Performances</em>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="border: 1px solid black; padding: 10px;">Temel
+                                    karakteristikler/Essential characteristics</th>
+                                <th style="border: 1px solid black; padding: 10px;">
+                                    Performans/Performance</th>
+                                <th style="border: 1px solid black; padding: 10px;">Harmonize teknik
+                                    standart/ Harmonised technical specification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Tablonun içeriği -->
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Boyut ve şekil
+                                    toleransları/Size and Shape Tolerances</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.2 - 5.3</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Kaynak
+                                    edilebilirlik/Weldability</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.3 - 5.4</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Kırılma
+                                    Tokluğu/Fracture toughness</td>
+                                <td style="border: 1px solid black; padding: 10px;">S235JR-J2,
+                                    S355JR-J2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.4 - 5.5</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Darbe
+                                    Direnci/Impact Resistance</td>
+                                <td style="border: 1px solid black; padding: 10px;"> For JR (27J at
+                                    room temperature) EN 1090-2<br /> For J0 (27J at 0°C) EN 1090-2<br />
+                                    For J2 (27J at -20°C) EN 1090-2 </td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.8 - 5.10</td>
+                            </tr>
+                            <!-- Devamı -->
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Yük Taşıma
+                                    kapasitesi/Load Bearing Capacity</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.5.1 - 4.5.2 - 5.6.2</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Kullanılabilirlik
+                                    Sınır Durumunda Şekil Değiştirme/Shape Change in Availability</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1990</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.5.5</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Yorulma
+                                    Dayanımı/Fatigue strength</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.5.1 - 4.5.3 - 5.6.2</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Yangına
+                                    direnç/Fire Resistance</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-2</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.5.1 - 4.5.4 - 5.7</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Yangına
+                                    tepki/Reaction to fire</td>
+                                <td style="border: 1px solid black; padding: 10px;">NPD</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.6 - 5.8</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">Kadmiyum ve
+                                    bileşiklerinin salınımı/Release of cadmium and its compounds</td>
+                                <td style="border: 1px solid black; padding: 10px;">NPD</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.7 - 5.9</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">
+                                    Radyoaktivite/Radioactivity</td>
+                                <td style="border: 1px solid black; padding: 10px;">NPD</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.7 - 5.9</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 10px;">
+                                    Dayanıklılık/Durability</td>
+                                <td style="border: 1px solid black; padding: 10px;">Yüzey hazırlığı,
+                                    boya EN ISO 12944-5 Corrosion Class Grade 3. Surface painted
+                                    acc. to EN ISO 12944-5</td>
+                                <td style="border: 1px solid black; padding: 10px;">EN 1090-1 Madde
+                                    4.9 - 5.11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="text-align: left; margin-top: 10%;"><strong>Uygun Teknik Belgeler
+                        ve/veya Özel Teknik Belgeler</strong> : Uygulanamaz<br />
+                        <strong>Appropriate
+                        Technical Documentation and / or Special Technical Documents</strong> : Not
+                        applicable </p>
+
+                    <p style="text-align: justify; margin-top: 2%; margin-bottom: 2%;">Yukarıda
+                        tanımlanan ürünün performansı, belirtilen performans gruplarına uygundur. Bu
+                        performans beyanı, 305/2011 sayılı Tüzüğe (AB) göre yukarıda belirtilen
+                        üreticinin sorumluluğundadır.<br /> The performance of the product described
+                        above is suitable for the specified performance groups. This declaration of
+                        performance is the responsibility of the aforementioned manufacturer
+                        according to Regulation (EU) 305/2011. </p>
+
+                    <p style="text-align: left; margin-top: 2%;">
+                        <strong>Üretici adına</strong>
+                    </p>
+
+                    <p style="text-align: left; margin-top: 2%;">31.01.2020<br />
+                        <strong>EBRU
+                        ÇELİKTEN</strong><br /> Kalite Müdürü </p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

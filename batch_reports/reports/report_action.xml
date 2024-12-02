@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_batch_ce" model="ir.actions.report">
+            <field name="name">CE Document</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">batch_reports.report_ce_batch</field>
+            <field name="report_file">batch_reports.report_ce_batch</field>
+            <field name="binding_model_id" ref="stock_picking_batch.model_stock_picking_batch" />
+            <field name="binding_type">report</field>
+            <field name="multi" eval="True" />
+        </record>
+        <record id="action_report_batch_dop" model="ir.actions.report">
+            <field name="name">DOP Document</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">batch_reports.report_dop_batch</field>
+            <field name="report_file">batch_reports.report_dop_batch</field>
+            <field name="binding_model_id" ref="stock_picking_batch.model_stock_picking_batch" />
+            <field name="binding_type">report</field>
+            <field name="multi" eval="True" />
+        </record>
+    </data>
+</odoo>

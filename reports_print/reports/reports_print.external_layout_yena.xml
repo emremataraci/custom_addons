@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="external_layout_yena">
+        <!-- Eğer 'o' tanımlı değilse, 'doc' olarak ayarla -->
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <!-- Şirket bilgilerini ayarla -->
+        <t t-if="not company">
+            <!-- Çoklu şirket durumu -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <!-- Header boş bırakılıyor -->
+        <div class="header"/>
+
+        <!-- Ana içerik -->
+        <div class="article">
+            <t t-out="0"/>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="text-center">
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Sayfa: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

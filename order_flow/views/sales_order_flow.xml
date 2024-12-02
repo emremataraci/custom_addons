@@ -1,0 +1,210 @@
+<odoo>
+    <data>
+        <record id="sale_crm_opportunity_invisible" model="ir.ui.view">
+            <field name="name">sale.crm.opportunity.invisible</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_crm.sale_view_inherit123" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opportunity_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="sale_management_template_invisible" model="ir.ui.view">
+            <field name="name">sale.management.template.invisible</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_management.sale_order_form_quote" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_order_template_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+                        
+        <record id="view_order_form_intherit_sale_flow" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.sale.flow</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+            
+                <xpath expr="//field[@name='order_line']/form//field[@name='name']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_packaging_qty']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_packaging_id']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="attributes">
+                    <attribute name="optional">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="(//field[@name='date_order'])[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="(//label[@for='date_order'])[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="(//field[@name='date_order'])[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="(//label[@for='date_order'])[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='client_order_ref']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='pricelist_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_row']" position="attributes">
+                    <attribute name="style">display: none;</attribute>
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="string">Customer Name</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="string">C-Invoice Address</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="string">C-Delivery Address</attribute>
+                </xpath>
+                <xpath expr="//field[@name='validity_date']" position="attributes">
+                    <attribute name="string">Validity of Offer</attribute>
+                </xpath>
+
+                <xpath expr="//header" position="inside">
+                    <button name="action_quotation_sent" type="object" string="Mark As Quotation Sent"
+                        class="oe_highlight" invisible="state != 'draft'" />
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="contact_id" />
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="company_id" string="Company (Seller)" />
+                    <field name="user_id" string="Sales Person (E-mail Sender)" />
+                    <field name="opportunity_id" />
+                    <field name="incoterm" required="1" />
+                    <field name="payment_term_id" />
+                    <field name="currency_id" />
+                </xpath>
+
+                <xpath expr="//field[@name='validity_date']" position="after">
+                    <field name="rfq_date" />
+                    <field name="quo_date" />
+                    <field 
+                        name="commitment_date" 
+                        string="C-Delivery Date" />
+                    <field 
+                        name="delivery_date" />
+                    <field 
+                        name="rfq_reference" 
+                        readonly="1"/>
+                    <field 
+                        name="customer_reference" 
+                        string="C-Reference No"
+                        readonly="state in ['cancel', 'sale', 'done']"
+                        required="1" />
+                    <field 
+                        name="project_sales" 
+                        readonly="state in ['cancel', 'sale', 'done']"/>
+                    <field name="analytic_account_id"
+                        readonly="state in ['cancel', 'sale', 'done']"/>
+                    <field name="sharepoint_url" widget="url" />
+                </xpath>
+
+                <xpath expr="//page/field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
+                    <field name="product_delivery_date" optional="hide" />
+                </xpath>
+
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="invoice_report" />
+                </xpath>
+                <!--
+                <xpath
+                expr="//field[@name='quota_cancel_reason_id']" position="attributes">
+                    <attribute name="string">Quotation Lost Reason</attribute>
+                </xpath>
+                -->
+            </field>
+        </record>
+        
+        <record id="view_quotation_tree_inherit_sale_flow" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="customer_reference" />
+                </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="invoice_report" readonly="1" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_sale_order_search_inherit_sale_flow" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="project_sales" />
+                    <field name="customer_reference" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_order_tree_to_invoice_yena_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.to.invoice.yena</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <!--Yerelleştirme sorunu
+                    <field name="document_numbers" optional="show" />
+                    -->
+                    <!--Inventory Developmenta alınacak
+                    <field name="transportation_codes" optional="show" />
+                    -->
+                    <!--Effective Date varken gerek var mı?
+                    <field name="date_done_list" optional="show" />
+                    -->
+                    <field name="effective_date" optional="show" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

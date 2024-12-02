@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Rapor Şablonu -->
+        <template id="report_sale_confirmation_of_order_document">
+            <t t-call="reports_print.external_layout_yena">
+                <style>
+                    * {
+                        font-family: "DejaVu Sans", Arial, sans-serif !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <br />
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <table style="font-size:11pt; width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <!-- Firma Bilgileri ve Logo -->
+                                    <td style="width:45%; vertical-align: top;">
+                                        <img t-if="o.company_id.logo"
+                                            t-att-src="image_data_uri(o.company_id.logo)"
+                                            style="max-height: 120px;" alt="Logo" />
+                                        <div style="margin-top: 20px;">
+                                            <strong>
+                                                <span t-field="o.company_id.name" />
+                                            </strong>
+                                            <br />
+                                            <span t-field="o.company_id.street" /><br />
+                                            <span t-field="o.company_id.street2" /><br />
+                                            <span t-field="o.company_id.city" />
+                                            <span> </span>
+                                            <span t-field="o.company_id.state_id" /> 
+                                            <span> </span>
+                                            <span t-field="o.company_id.zip" /> 
+                                            <br />
+                                            <!-- Banka Bilgileri -->
+                                            <div style="margin-top: 10px;">
+                                                BANK NAME: BUNQ <br />
+                                                IBAN: NL26BUNQ2206607298 <br />
+                                                BANK Swift Code: BUNQNL2AXXX <br />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- Müşteri ve Diğer Bilgileri -->
+                                    <td style="width:45%; vertical-align: top; padding-left: 10px;">
+                                        <div style="line-height: 1.5;">
+                                            <h4 style="margin-bottom: 1rem; font-weight: bold;">ORDER CONFIRMATION</h4>
+                                            <span t-field="o.partner_id" />
+                                            <br />
+                                            <span t-field="o.partner_id.street" />
+                                            <span>, </span>
+                                            <span t-field="o.partner_id.zip" />
+                                            <span> </span>
+                                            <span t-field="o.partner_id.city" />
+                                            <br />
+                                            <span t-field="o.partner_id.country_id.name" />
+                                            <br />
+                                            <div t-if="o.partner_id.vat">
+                                                VAT:
+                                                <span t-field="o.partner_id.vat" />
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <div t-if="o.customer_reference">
+                                                <b>Customer Order No:</b>
+                                                <span t-field="o.customer_reference" />
+                                            </div>
+                                            <div>
+                                                <b>Offer No:</b>
+                                                <span t-field="o.project_sales" />
+                                            </div>
+                                            <div t-if="o.quo_date">
+                                                <b>Document Date:</b>
+                                                <span t-field="o.quo_date" />
+                                            </div>
+                                            <div t-if="o.contact_id">
+                                                <b>Attention:</b>
+                                                <span t-field="o.contact_id" />
+                                            </div>
+                                            <div t-if="o.partner_shipping_id">
+                                                <b>Delivery Address:</b>
+                                                <span t-field="o.partner_shipping_id" />
+                                            </div>
+                                            <div t-if="o.incoterm.code">
+                                                <b>Delivery Term:</b>
+                                                <span t-field="o.incoterm.code" />
+                                            </div>
+                                            <div t-if="o.commitment_date">
+                                                <b>Delivery Date:</b>
+                                                <span t-field="o.commitment_date" t-options="{'format': 'dd/MM/yyyy'}" />
+                                            </div>
+                                            <div t-else="">
+                                                <b>Delivery Date:</b>
+                                                <span t-esc="o.delivery_date" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Satırların Eklenmesi -->
+                        <table class="table table-sm o_main_table"
+                            style="font-size:11pt; width: 100%; margin-top: 40px; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">No</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Drawing No</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Coating</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Total Weight (kg)</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Quantity</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Unit Price</th>
+                                    <th style="text-align:center; padding: 8px; border-bottom: 1px solid #000;">Subtotal Price (Exc. VAT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="line_no" t-value="0" />
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr>
+                                        <!-- No -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <t t-set="line_no" t-value="line_no + 1" />
+                                            <t t-esc="line_no" />
+                                        </td>
+                                        <!-- Drawing No -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-field="line.product_id.name" />
+                                        </td>
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-field="line.product_id.coating" />
+                                        </td>
+                                        <!-- Total Weight -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-esc="line.product_id.weight * line.product_uom_qty" />
+                                        </td>
+                                        <!-- Quantity -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-field="line.product_uom_qty" />
+                                            <span t-field="line.product_uom.name" />
+                                        </td>
+                                        <!-- Unit Price -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-field="line.price_unit" widget="monetary"
+                                                options="{'currency_field': 'company_currency_id'}" />
+                                        </td>
+                                        <!-- Subtotal Price (Exc. VAT) -->
+                                        <td style="text-align:center; padding: 8px; border: none;">
+                                            <span t-field="line.price_subtotal" widget="monetary"
+                                                options="{'currency_field': 'company_currency_id'}" />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="6" style="text-align:right; font-weight:bold; padding: 8px; border-top: 1px solid #000;">
+                                        Total (Exc. VAT):
+                                    </td>
+                                    <td class="text-center" style="font-weight:bold; padding: 8px; border-top: 1px solid #000;">
+                                        <span t-esc="o.amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Footer -->
+                        <div class="footer o_standard_footer" style="text-align:center;font-size:11px">
+                            <ul class="list-inline mb4"></ul>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <t t-if="o.company_id.id == 2">
+                                <div>
+                                    YENA ENGINEERING BV World Trade Center, Beursplein 37, 3011 AA Rotterdam, The Netherlands
+                                </div>
+                                <div>
+                                    P:+31 (0) 10 84 54 617 * yena@yenaengineering.nl * www.yenaengineering.nl
+                                </div>
+                                <div>
+                                    BANK NAME: BUNQ * IBAN: NL26BUNQ2206607298 * BANK Swift Code: BUNQNL2AXXX
+                                </div>
+                                <div class="text-muted"> Page: <span class="page" /> / <span class="topage" /></div>
+                            </t>
+                            <t t-else="">
+                                <div>
+                                    <div>
+                                        BANK NAME: BUNQ * IBAN: NL26BUNQ2206607298 * BANK Swift Code: BUNQNL2AXXX
+                                    </div> <div>
+                                        BANK NAME: BUNQ * IBAN: NL26BUNQ2206607298 * BANK Swift Code: BUNQNL2AXXX
+                                    </div>
+                                    <!-- Genel Şirket Adresi, Şehir, Ülke -->
+                                </div>
+                                <div>
+                                    <!-- Telefon ve E-posta Bilgileri -->
+                                </div>
+                                <div class="text-muted"> Page: <span class="page" /> / <span class="topage" /></div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <!-- Rapor Tanımı -->
+        <template id="report_sale_confirmation_of_order">
+            <t t-name="reports_print.report_sale_confirmation_of_order">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="reports_print.report_sale_confirmation_of_order_document" t-lang="o.partner_id.lang" />
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_contact_status_inherit_yena" model="ir.ui.view">
+        <field name="name">res.partner.contact_status.inherit.yena</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_vat.view_partner_base_vat_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='vat_vies_container']" position="after">
+                <field name="contact_type" invisible="contact_status_visibility" required="not contact_status and type != 'driver'"/>
+                <field name="contact_status" widget="many2many_tags" invisible="contact_type != False"/>
+                <field name="contact_status_visibility" invisible="1"/>
+                <field name="industry_id" invisible="is_company == False or contact_type == 'potential_vendor' or contact_type == False" required="contact_type == 'potential_customer'" options="{'no_create': True}"/>
+                <field name="vendor_type" invisible="is_company == False or contact_type == 'potential_customer' or contact_type == False" required="contact_type == 'potential_vendor' and type != 'driver'"/>
+                <field name="type_of_material" invisible="is_company == False or contact_type == 'potential_customer' or vendor_type != 'material'" required="vendor_type == 'material'" widget="many2many_tags"/>                
+            </xpath>
+        </field>
+    </record>    
+</odoo>
