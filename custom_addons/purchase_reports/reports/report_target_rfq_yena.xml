@@ -185,46 +185,52 @@
                                         </t>
                                     </tr>
 
-                                    <!-- Ürün Detayları-->
-                                    <t
-                                        t-if="not line.display_type and line.product_id.description_purchase">
-                                        <tr style="border: none; line-height: 1.0; height: auto;">
-                                            <td class="text-left"
-                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
-                                                Ürün Tanımı
-                                            </td>
-                                            <td colspan="99" class="text-left"
-                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span
-                                                    t-field="line.product_id.description_purchase" />
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="not line.display_type and line.product_id.coating">
-                                        <tr style="border: none; line-height: 1.0; height: auto;">
-                                            <td class="text-left"
-                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold; ">
-                                                Kaplama
-                                            </td>
-                                            <td colspan="99" class="text-left"
-                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span t-field="line.product_id.coating" />
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="not line.display_type and line.product_id.weight">
-                                        <tr
-                                            style="border: none; border-bottom: 1px solid black; line-height: 1.0; height: auto;">
-                                            <td class="text-left"
-                                                style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
-                                                Teorik Ağırlık
-                                            </td>
-                                            <td colspan="99" class="text-left"
-                                                style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
-                                                :<span t-field="line.product_id.weight" />
-                                            </td>
-                                        </tr>
-                                    </t>
+<!-- Ürün Detayları-->
+<t t-if="not line.display_type and line.product_id.description_purchase">
+    <tr style="border: none; line-height: 1.0; height: auto;">
+        <td class="text-left"
+            style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
+            Ürün Tanımı
+        </td>
+        <td colspan="99" class="text-left"
+            style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
+            :<span t-field="line.product_id.description_purchase" />
+        </td>
+    </tr>
+</t>
+<t t-if="not line.display_type and line.product_id.coating">
+    <tr style="border: none; line-height: 1.0; height: auto;">
+        <td class="text-left"
+            style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
+            Kaplama
+        </td>
+        <td colspan="99" class="text-left"
+            style="width: 85%; vertical-align: middle; border: none; padding: 0px;">
+            :<span t-field="line.product_id.coating" />
+        </td>
+    </tr>
+</t>
+<t t-if="not line.display_type and line.product_id.weight">
+    <tr style="border: none; border-bottom: 1px solid black; line-height: 1.0; height: auto;">
+        <td class="text-left"
+            style="width: 15%; vertical-align: middle; border: none; padding: 0px 0px 0px 20px; font-size: 12px; font-weight: bold;">
+            Teorik Ağırlık
+        </td>
+        <td colspan="99" class="text-left"
+            style="width: 85%; vertical-align: middle; border: none; padding: 0px; display: flex; align-items: center;">
+            <!-- Ağırlık Bilgisi -->
+            <span style="flex-grow: 1;">: <span t-field="line.product_id.weight" /></span>
+            <!-- Teslim Tarihi Bilgisi -->
+            <t t-if="line.delivery_date">
+                <span style="font-size: 12px; font-weight: bold; margin-left: auto;">
+                    Teslim Tarihi: <span t-field="line.delivery_date" t-options="{'format': 'dd/MM/yyyy'}" />
+                </span>
+            </t>
+        </td>
+    </tr>
+</t>
+
+
 
                                     <t
                                         t-if="current_section and (line_last or o.order_line[line_index + 1].display_type == 'line_section')">
