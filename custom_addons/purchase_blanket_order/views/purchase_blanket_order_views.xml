@@ -154,7 +154,7 @@
                                         string="Original Qty"
                                         context="{'partner_id':parent.partner_id, 'quantity':original_uom_qty, 'company_id': parent.company_id}"
                                     />
-                                    <field name="product_uom" groups="uom.group_uom" />
+                                    <field name="product_uom"/>
                                     <field name="price_unit" />
                                     <field name="date_schedule" />
                                     <field name="ordered_uom_qty" />

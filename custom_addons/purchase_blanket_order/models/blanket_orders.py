@@ -255,11 +255,8 @@ class BlanketOrder(models.Model):
             or False
         )
 
-        self.fiscal_position_id = (
-            self.env["account.fiscal.position"]
-            .with_context(company_id=self.company_id.id)
-            .get_fiscal_position(self.partner_id.id)
-        )
+        self.fiscal_position_id = self.partner_id.property_account_position_id
+
 
         self.currency_id = (
             self.partner_id.property_purchase_currency_id.id
