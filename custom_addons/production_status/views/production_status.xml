@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_purchase_order_line_production_status_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.production.status.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence_number" string="Sequence No"/>
+                <field name="name" string="Purchase Order"/>
+                <field name="partner_id" string="Supplier"/>
+                <field name="product_qty" string="Product Quantity"/>
+                <field name="delivered_qty" string="Delivered Quantity"/>
+                <field name="delivery_date" string="Delivery Date"/>
+                <field name="material_procurement" string="Material Procurement (%)"/>
+                <field name="cutting" string="Cutting (%)"/>
+                <field name="bending" string="Bending (%)"/>
+                <field name="welding" string="Welding (%)"/>
+                <field name="soldering" string="Soldering (%)"/>
+                <field name="machining" string="Machining (%)"/>
+                <field name="coating" string="Coating (%)"/>
+                <field name="assembly" string="Assembly (%)"/>
+                <field name="packaging" string="Packaging (%)"/>
+                <field name="ready" string="Ready (%)" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_purchase_order_line_production_status_form" model="ir.ui.view">
+        <field name="name">purchase.order.line.production.status.form</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sequence_number" string="Sequence No" readonly="1"/>
+                        <field name="order_id" string="Purchase Order" readonly="1"/>
+                        <field name="partner_id" string="Supplier" readonly="1"/>
+                        <field name="product_qty" string="Product Quantity" readonly="1"/>
+                        <field name="delivered_qty" string="Delivered Quantity"/>
+                        <field name="delivery_date" string="Delivery Date"/>
+                    </group>
+                    <group>
+                        <field name="material_procurement"/>
+                        <field name="cutting"/>
+                        <field name="bending"/>
+                        <field name="welding"/>
+                        <field name="soldering"/>
+                        <field name="machining"/>
+                        <field name="coating"/>
+                        <field name="assembly"/>
+                        <field name="packaging"/>
+                        <field name="ready" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_production_status" model="ir.actions.act_window">
+        <field name="name">Production Status</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_purchase_order_line_production_status_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first Production Status
+            </p>
+        </field>
+    </record>
+
+    <!-- Menüler -->
+    <menuitem id="menu_production_root" name="Production" parent="purchase.menu_purchase_root" sequence="10"/>
+    <menuitem id="menu_production_status" name="Production Status" parent="menu_production_root" action="action_production_status" sequence="1"/>
+</odoo>
