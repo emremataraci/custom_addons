@@ -98,6 +98,13 @@ class PurchaseOrder(models.Model):
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
+    project_purchase = fields.Many2one(
+        'project.project',
+        related='order_id.project_purchase',
+        string="Project Purchase",
+        store=True,
+        readonly=True
+    )
     """kalkıyor
     line_status = fields.Char(string="Line Status")
     """
