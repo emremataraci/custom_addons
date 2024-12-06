@@ -6,25 +6,16 @@
             <field name="model">project.project</field>
             <field name="inherit_id" ref="project.edit_project" />
             <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_view_tasks']" position="before">
+                <xpath expr="//button[@name='action_view_tasks']" position="before">
                     <button class="oe_stat_button"
                         type="object"
-                        name="action_show_purchases"
-                        icon="fa-credit-card"
-                        help="Show related purchases">
-                        <field string="Purchases"
-                            name="purchase_count"
+                        name="action_show_sales"
+                        icon="fa-ticket"
+                        help="Show related sales">
+                        <field string="Sales"
+                            name="sales_count"
                             widget="statinfo" />
                     </button>
-                    <button class="oe_stat_button"
-                    type="object"
-                    name="action_show_sales"
-                    icon="fa-ticket"
-                    help="Show related sales">
-                    <field string="Sales"
-                        name="sales_count"
-                        widget="statinfo" />
-                </button>
                     <button class="oe_stat_button"
                         type="object"
                         name="action_show_transfers"
@@ -32,6 +23,15 @@
                         help="Show related transfers">
                         <field string="Transfers"
                             name="delivery_count"
+                            widget="statinfo" />
+                    </button>
+                    <button class="oe_stat_button"
+                        type="object"
+                        name="action_show_purchases"
+                        icon="fa-credit-card"
+                        help="Show related purchases">
+                        <field string="Purchases"
+                            name="purchase_count"
                             widget="statinfo" />
                     </button>
                 </xpath>
