@@ -89,12 +89,12 @@ class StockPickingBatch(models.Model):
                             'batch_id': batch.id,
                             'customer_reference': purchase_order_line.order_id.customer_reference,
                             'product_id': line.product_id.id,
-                            'package_quantity': line.qty_done,
+                            'package_quantity': line.quantity_done,
                             'description': line.product_id.description_sale,
                             'origin' : line.product_id.origin_country_id.name,
                             'unit_of_measure': line.product_uom_id.id,
                             'unit_net_weight': line.product_id.weight, 
-                            'total_net_weight': line.product_id.weight * line.qty_done,
+                            'total_net_weight': line.product_id.weight * line.quantity_done,
                             'package_no': 1,
                             'gross_weight': line.gross_weight,
                             'width': line.width,
@@ -108,7 +108,7 @@ class StockPickingBatch(models.Model):
 
                 else:
                     # Tam paketler ve kalan miktar için kayıtlar oluştur
-                    full_packages = int(line.qty_done / line.package_quantity)
+                    full_packages = int(line.quantity_done / line.package_quantity)
                     for _ in range(full_packages):
                         vals = {
                             'name': line.product_id.name,
@@ -133,7 +133,7 @@ class StockPickingBatch(models.Model):
                         PackagingPreparation.create(vals)
                         pallet_no += 1
 
-                    remaining_qty = line.qty_done % line.package_quantity
+                    remaining_qty = line.quantity_done % line.package_quantity
                     if remaining_qty > 0:
                         vals = {
                             'name': line.product_id.name,
