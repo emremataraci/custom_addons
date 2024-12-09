@@ -139,40 +139,24 @@ class SaleOrder(models.Model):
     """ 
     
     def create_project_button(self):
-        for record in self:
-            if record.project_sales:
-                # Kullanıcı tarafından sağlanan isimle yeni bir proje oluştur
-                project_name = record.project_sales.name
-                if not project_name:
-                    raise UserError("Please provide a name for the project in 'Project Number' field.")
+        if not self.customer_reference:
+            return
 
-                project_vals = {
-                    'name': project_name,
-                    'partner_id': record.partner_id.id,
-                    'company_id': False,  # Gerekirse uygun şirket ID'sini kullanın
-                }
-                project = self.env['project.project'].create(project_vals)
+        project_vals = {
+            'name': self.name + '-' + self.customer_reference,
+            'partner_id': self.partner_id.id,
+            'company_id': False,  # `id` değerini kullanın
+        }
+        project = self.env['project.project'].create(project_vals)
 
-            elif record.customer_reference:
-                # Varsayılan isimle yeni bir proje oluştur
-                project_name = f"{record.name}-{record.customer_reference}"
-                project_vals = {
-                    'name': project_name,
-                    'partner_id': record.partner_id.id,
-                    'company_id': False,  # Gerekirse uygun şirket ID'sini kullanın
-                }
-                project = self.env['project.project'].create(project_vals)
-            else:
-                raise UserError("Cannot create project without 'Customer Reference' or 'Project Number'.")
+        # Proje oluşturulduktan sonra analitik hesap ID'yi al
+        analytic_account_id = project.analytic_account_id.id if project.analytic_account_id else None
 
-            # Proje oluşturulduktan sonra analitik hesap ID'yi al
-            analytic_account_id = project.analytic_account_id.id if project.analytic_account_id else None
-
-            # Son olarak, satışa analitik hesabı ve proje ID'yi ekleyin.
-            record.write({
-                'analytic_account_id': analytic_account_id,
-                'project_sales': project.id,
-            })            
+        # Son olarak, satışa analitik hesabı ve proje ID'yi ekleyin.
+        self.write({
+            'analytic_account_id': analytic_account_id,
+            'project_sales': project.id,
+        })            
    
     """Effective Date satış içerisinde var transfer gerçekleşince gözüküyor bu fonksiyona gerek yok 
     def _compute_date_done_list(self):
