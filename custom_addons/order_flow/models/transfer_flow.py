@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 import requests
 import base64
 from io import BytesIO
@@ -160,6 +161,23 @@ class StockMove(models.Model):
                     move.sales_cost = 0.0
             else:
                 move.sales_cost = 0.0
+                
+    @api.constrains('product_uom_qty')
+    def _check_product_uom_qty(self):
+        for move in self:
+            available_qty = move.product_id.with_context(location=move.location_id.id).virtual_available
+            if move.product_uom_qty > available_qty:
+                raise ValidationError(
+                    f"Stokta mevcut olan {available_qty} adetten fazla ({move.product_uom_qty}) adet gönderilemez. "
+                    f"/ You cannot send more than the available stock ({available_qty}) units ({move.product_uom_qty})."
+                )
+
+            sale_order_line = move.sale_line_id
+            if sale_order_line and move.product_uom_qty > sale_order_line.product_uom_qty:
+                raise ValidationError(
+                    f"Satış siparişindeki miktar ({sale_order_line.product_uom_qty}) ile fazla adet ({move.product_uom_qty}) gönderilemez. "
+                    f"/ You cannot send more than the sales order quantity ({sale_order_line.product_uom_qty}) units ({move.product_uom_qty})."
+                )
                 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
