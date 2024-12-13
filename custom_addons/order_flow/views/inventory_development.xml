@@ -179,8 +179,8 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
              <xpath expr="//notebook" position="inside">
-                <page string="Technical Info">
-                    <group string="Technical Documents">
+                <page name="technical_info" string="Technical Info">
+                    <group name="technical_documents" string="Technical Documents">
                         <group>
                             <field name="technical_drawing" filename="technical_drawing_filename"/>
                             <field name="original_filename" readonly="1" />

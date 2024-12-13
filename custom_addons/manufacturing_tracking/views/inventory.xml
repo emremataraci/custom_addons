@@ -1,0 +1,52 @@
+<odoo>
+    <!-- Yeni Tree Görünümü -->
+    <record id="view_manufacturing_process_tracking" model="ir.ui.view">
+        <field name="name">view.manufacturing.process.tracking</field>
+        <field name="model">manufacturing.process</field>
+        <field name="arch" type="xml">
+            <tree delete="0" multi_edit="1" default_order="name" create="true">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_manufacturing_process_form" model="ir.ui.view">
+        <field name="name">view.manufacturing.process.form</field>
+        <field name="model">manufacturing.process</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Process">
+                <sheet>
+                    <group>
+                        <field name="name" string="Process Name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Aksiyon Tanımlaması -->
+    <record id="action_manufacturing_process_tracking" model="ir.actions.act_window">
+        <field name="name">Manufacturing Processes</field>
+        <field name="res_model">manufacturing.process</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_manufacturing_process_tracking" />
+    </record>
+
+    <!-- Menü Tanımlaması -->
+    <menuitem id="menu_manufacturing_config" name="Manufacturing Processes"
+        parent="stock.menu_stock_config_settings" action="action_manufacturing_process_tracking"
+        sequence="10" />
+
+    <!-- View Product Template Form Inheritance -->
+    <record id="view_product_template_inherit_form" model="ir.ui.view">
+        <field name="name">view.product.template.inherit.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="order_flow.view_product_template_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='technical_info']//field[@name='cdn_link']" position="after">
+                <field name="processes" widget="many2many_tags" options="{'no_create': True}"
+                    placeholder="Select or add processes" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
