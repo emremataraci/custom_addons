@@ -10,74 +10,51 @@ class PurchaseOrder(models.Model):
     project_purchase = fields.Many2one('project.project', string="Project Number", store=True)
     contact_id = fields.Many2one('res.partner', string='Contact Person', store=True)
     tags = fields.Many2many("project.tags", string="Tags")
-    """ muhasebeye alınacak
-    tax_selection_purchase = fields.Many2one('account.tax', string="Tax Selection", help="Select taxes to confirm and apply to all order lines." ,store=True)
-    """
 
     def _inter_company_create_sale_order(self, dest_company):
         super(PurchaseOrder, self)._inter_company_create_sale_order(dest_company)
+        project = self.project_purchase
+        analytic_account_id = project.analytic_account_id.id if project and project.analytic_account_id else False
 
-        # Satın almadan satışa aktarılacak verileri alın
-        purchase_order = self.env['purchase.order'].browse(self.id)
-
-        project = purchase_order.project_purchase
-        if project and hasattr(project, 'analytic_account_id') and project.analytic_account_id:
-            analytic_account_id = project.analytic_account_id.id
-        else:
-            analytic_account_id = False
-
-        # Şirket ve partner koşulları
-        if purchase_order.company_id.id == 2 and purchase_order.partner_id.id == 1:
-            # Satış siparişi değerleri
+        if self.company_id.id == 2 and self.partner_id.id == 1:
+            sale_order = self.env['sale.order'].search([('auto_purchase_order_id', '=', self.id)], limit=1)
             sale_order_vals = {
                 'project_sales': project.id if project else False,
                 'analytic_account_id': analytic_account_id,
-                'customer_reference': purchase_order.customer_reference,
+                'customer_reference': self.customer_reference,
             }
-
-            # Satış siparişini bulun
-            sale_order = self.env['sale.order'].search([('auto_purchase_order_id', '=', self.id)], limit=1)
             sale_order.write(sale_order_vals)
 
-            # Satın alma siparişi satırlarını döngüleyin ve satış siparişi satırlarını güncelleyin
-            for po_line, so_line in zip(purchase_order.order_line, sale_order.order_line):
-                sale_line_vals = {
-                    'price_unit': po_line.price_unit,
-                }
-                so_line.write(sale_line_vals)
+            for po_line, so_line in zip(self.order_line, sale_order.order_line):
+                so_line.write({'price_unit': po_line.price_unit})
 
-    """ ID'ler değişecek """
     @api.onchange('company_id')
     def _onchange_company_id(self):
-        if self.company_id.id == 1:
-            self.incoterm_id = 14
-        elif self.company_id.id == 2:
-            self.incoterm_id = 10
-            
+        self.incoterm_id = 14 if self.company_id.id == 1 else 10 if self.company_id.id == 2 else self.incoterm_id
+
     @api.onchange('project_purchase')
     def _onchange_project_purchase(self):
         analytic_account = self.project_purchase.analytic_account_id
         for line in self.order_line:
-            line.account_analytic_id = analytic_account.id
-    """ Transfer ile ilgili fieldlar burada eklenecek """
+            line.account_analytic_id = analytic_account.id if analytic_account else False
+
     def button_confirm(self):
         res = super(PurchaseOrder, self).button_confirm()
         for order in self:
             order.order_line.write({'production_status': 'tobe_material_purchase'})
-            delivery_orders = self.env['stock.picking'].search(
-                [('origin', '=', order.name)])
+            delivery_orders = self.env['stock.picking'].search([('origin', '=', order.name)])
             for delivery_order in delivery_orders:
                 delivery_order.write({
-                    'project_transfer': [(6, 0, order.project_purchase.ids)],
+                    'project_transfer': [(6, 0, [order.project_purchase.id])],
                 })
         return res
-        
+
     def button_cancel(self):
         res = super(PurchaseOrder, self).button_cancel()
         for order in self:
             order.order_line.write({'production_status': False})
         return res
-      
+
     def mark_as_sent(self):
         for record in self:
             record.write({
@@ -95,6 +72,7 @@ class PurchaseOrder(models.Model):
         self.contact_id = False
         return {'domain': {'contact_id': [('parent_id', '=', self.partner_id.id), ('type', '=', 'contact')]}}
 
+
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
@@ -105,9 +83,6 @@ class PurchaseOrderLine(models.Model):
         store=True,
         readonly=True
     )
-    """kalkıyor
-    line_status = fields.Char(string="Line Status")
-    """
     delivery_date = fields.Date(string="Required Delivery Date")
     account_analytic_id = fields.Many2one(
         'account.analytic.account',
@@ -115,12 +90,7 @@ class PurchaseOrderLine(models.Model):
         store=True
     )
     tags = fields.Many2many(related='order_id.tags', string="Tags", readonly=True)
-    """kalkıyor
-    status = fields.Char(string="Status")
-    """
-    """Bu ne
-    user_id = fields.Char(string="User", related='order_id.user_id.name', readonly=True)
-    """
+
     production_status = fields.Selection([
         ('tobe_material_purchase', 'To be Material Purchase'),
         ('material_purchase', 'Material Purchased'),
@@ -148,9 +118,9 @@ class PurchaseOrderLine(models.Model):
         ('partially_despatched', 'Partially Despatched'),
         ('whoops', 'WHOOPS!'),
     ], string='Production Status')
-    """last_Date Manuel elle doldurulan bir yer kalacak """
-    last_date = fields.Date(string="Son Tarih")
-    
+
+    last_date = fields.Date(string="Last Date")
+
     @api.onchange('qty_received', 'product_qty')
     def _onchange_production_status(self):
         for record in self:

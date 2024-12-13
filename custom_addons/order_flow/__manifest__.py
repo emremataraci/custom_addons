@@ -9,7 +9,7 @@
     'website': "https://www.yenaengineering.nl",
     'category': 'Uncategorized',
     'version': '0.1',
-    'depends': ['base', 'purchase', 'sale', 'sale_crm', 'sale_management', 'product', 'stock', 'barcodes', 'digest', 'account', 'delivery', 'project', 'stock_picking_batch'],
+    'depends': ['base', 'purchase', 'project', 'sale', 'sale_crm', 'sale_management', 'product', 'stock', 'barcodes', 'digest', 'account', 'delivery', 'stock_picking_batch'],
     'data': [
         # 'security/ir.model.access.csv',
         'views/sales_order_flow.xml',

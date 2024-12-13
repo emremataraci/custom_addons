@@ -173,6 +173,38 @@
             </xpath>
         </field>
     </record>
+        <record id="view_product_template_form" model="ir.ui.view">
+        <field name="name">view.product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//notebook" position="inside">
+                <page string="Technical Info">
+                    <group string="Technical Documents">
+                        <group>
+                            <field name="technical_drawing" filename="technical_drawing_filename"/>
+                            <field name="original_filename" readonly="1" />
+                            <field name="cdn_link" widget="url" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_product_form_inherit_status" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.status</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Header bölümüne erişim -->
+            <header position="inside">
+                <!-- Durum Alanını Statusbar Olarak Göster -->
+                <field name="status" widget="statusbar" statusbar_visible="phase1,phase2,phase3" options="{'clickable': True}"/>
+            </header>
+        </field>
+    </record>
     <record id="form_inherit_yena_development_inventory" model="ir.ui.view">
         <field name="name">purchase.order.form.inherit.yena.development</field>
         <field name="model">purchase.order</field>

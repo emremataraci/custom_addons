@@ -3,7 +3,11 @@ from odoo.exceptions import ValidationError
 import requests
 import base64
 from io import BytesIO
+import os
 from datetime import datetime, timedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class Picking(models.Model):
     _inherit = 'stock.picking'
@@ -192,17 +196,19 @@ class ProductTemplate(models.Model):
         ("electrostatic_powder_coating_black", "Electrostatic powder coating Black"),
         ("shop_primer", "Shop Primer")
     ], string="Coating")
+    technical_drawing = fields.Binary('Technical Drawing', attachment=True, required=True)
+    technical_drawing_filename = fields.Char('Technical Drawing Filename')
+    original_filename = fields.Char('Original Filename', compute='_compute_original_filename', store=True)
+    cdn_link = fields.Char('CDN Link', tracking=True)  # İzleme özelliği eklendi
+    status = fields.Selection([
+        ('phase1', 'Phase-1'),
+        ('phase2', 'Phase-2'),
+        ('phase3', 'Phase-3'),
+    ], string='Phase', default='phase1', required=True, tracking=True)
     """Buna gerek var mı?
     material = fields.Many2many('product.yena_material', string="Material")
     """
     min_order_qty = fields.Char(string="Min. Order Quantity")
-    """Çalışmıyor zaten
-    technical_drawing = fields.Binary(string='Technical Drawing')
-    technical_drawing_filename = fields.Char()
-    technical_drawing_url = fields.Char(string='Technical Drawing URL', readonly=True)
-    technical_drawing_revision = fields.Char(string='Technical Drawing Revision')
-    technical_drawing_link = fields.Html(string='Technical Drawing Link', compute="_compute_technical_drawing_link")
-    """
     """Kullanılıyor mu bilmiyorum
     manufacturing_instructions = fields.Many2many('ir.attachment', 'manufacturing_instruction_rel', 'product_id', 'attachment_id', string='Standart Operation Procedure')
     packaging_instructions = fields.Many2many('ir.attachment', 'packaging_instruction_rel', 'product_id', 'attachment_id', string='Packaging Instructions')
@@ -280,61 +286,114 @@ class ProductTemplate(models.Model):
             res['seller_ids'] = [(0, 0, line) for line in lines]
     
         return res
-    """Burası yeniden yazılacak
-    def _post_technical_drawing(self, drawing, filename, product_id, product_name):
-        try:
-            url = 'https://portal-test.yenaengineering.nl/api/technicaldrawings'
-            file_data = BytesIO(base64.b64decode(drawing))
-            files = {'technical_drawing': (filename, file_data)}
-            data = {
-                'odooid': product_id,
-                'product_name': product_name,
-                'original_filename': filename
-            }
-            response = requests.post(url, files=files, data=data)
-            response.raise_for_status()
-            return response.json()['data']['technical_drawing_url']
-        except Exception as e:
-            raise
+    
 
-    @api.depends('technical_drawing_url')
-    def _compute_technical_drawing_link(self):
+
+    @api.depends('technical_drawing_filename')
+    def _compute_original_filename(self):
+        """Compute the original filename using the uploaded file's name, ID, timestamp, and extension."""
         for record in self:
-            if record.technical_drawing_url:
-                file_name = record.technical_drawing_url.split('/')[-1]
-                link = '<a href="{}">{}</a>'.format(record.technical_drawing_url, file_name)
-                record.technical_drawing_link = link
+            if record.technical_drawing_filename:
+                # Dosya adını ve uzantısını ayır
+                base_name, extension = os.path.splitext(record.technical_drawing_filename)
+                # Geçerli tarih ve saat
+                timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                # original_filename alanını güncelle
+                record.original_filename = f"{base_name}-id={record.id}-{timestamp}{extension}"
             else:
-                record.technical_drawing_link = False
+                record.original_filename = "default_filename"
 
-    def _check_technical_drawing(self, old_revision=None, old_drawing_url=None):
-        if self.technical_drawing:
-            drawing_url = self._post_technical_drawing(
-                self.technical_drawing,
-                self.technical_drawing_filename,
-                self.id,
-                self.name
-            )
+    def post_to_cdn(self):
+        """Upload the technical drawing to CDN and return the URL."""
+        self.ensure_one()
+        if not self.technical_drawing:
+            raise Exception("Technical Drawing dosyası bulunamadı.")
+        
+        _logger.info(f"CDN'e gönderilecek dosya adı: {self.original_filename}")
+        _logger.info(f"CDN'e gönderilecek ürün adı: {self.name}")
 
-            self.write({
-                'technical_drawing_url': drawing_url,
-                'technical_drawing': False
-            })
+        url = "https://portal-test.yenaengineering.nl/api/technicaldrawings"
+        headers = {'Accept': 'application/json'}
 
-            # old_revision = old_revision or "yok"
-            # old_drawing_url = old_drawing_url or "yok"
-            #
-            # # Chatter'a mesaj ekliyoruz
-            # body = ("""
-            #         <p>Teknik Çizim {} revizyonu ile güncellenmiştir.</p>
-            #         <p>Dosya: <a href="{}">{}</a></p>
-            #         <p>Eski Revizyon: {}</p>
-            #         <p>Eski Teknik Çizim: <a href="{}">{}</a></p>
-            #         """).format(self.technical_drawing_revision, drawing_url, drawing_url, old_revision,
-            #                     old_drawing_url, old_drawing_url)
-            #
-            # self.message_post(body=body)
+        try:
+            decoded_file = base64.b64decode(self.technical_drawing)
+        except Exception as e:
+            _logger.error(f"Dosya çözme hatası: {str(e)}")
+            raise Exception(f"Dosya çözme hatası: {str(e)}")
 
+        files = {
+            'odooid': (None, str(self.id)),
+            'product_name': (None, self.name),  # Doğru ürün adı gönderiliyor
+            'original_filename': (None, self.original_filename),  # Doğru dosya adı gönderiliyor
+            'technical_drawing': (self.original_filename, decoded_file)
+        }
+
+        # Gönderilecek verileri loglama (binary veri yerine sadece isimleri logluyoruz)
+        _logger.debug(f"CDN'e gönderilen dosya verileri: odooid={self.id}, product_name={self.name}, original_filename={self.original_filename}")
+
+        try:
+            response = requests.post(url, headers=headers, files=files)
+            _logger.info(f"CDN'e dosya yükleme isteği gönderildi: {url}")
+            _logger.debug(f"CDN API isteği verileri: odooid={self.id}, product_name={self.name}, original_filename={self.original_filename}")
+        except Exception as e:
+            _logger.error(f"CDN'e dosya yükleme isteği gönderilirken hata oluştu: {str(e)}")
+            raise Exception(f"CDN'e dosya yükleme isteği gönderilirken hata oluştu: {str(e)}")
+
+        _logger.debug(f"CDN API yanıtı: {response.status_code} - {response.text}")
+
+        if response.status_code in (200, 201):
+            try:
+                response_data = response.json()
+                _logger.debug(f"CDN API yanıt verisi: {response_data}")
+            except ValueError:
+                _logger.error("CDN yanıtı JSON formatında değil.")
+                raise Exception("CDN yanıtı JSON formatında değil.")
+
+            if response_data.get("status") == "success" and response_data.get("statusCode") == 201:
+                technical_drawing_url = response_data['data'].get('technical_drawing_url')
+                if technical_drawing_url:
+                    _logger.info(f"CDN'den alınan URL: {technical_drawing_url}")
+                    return technical_drawing_url
+                else:
+                    _logger.error("Yanıttan 'technical_drawing_url' bilgisi alınamadı.")
+                    raise Exception("Yanıttan 'technical_drawing_url' bilgisi alınamadı.")
+            else:
+                _logger.error("CDN yanıtı 'success' durumunda değil.")
+                raise Exception("CDN yanıtı 'success' durumunda değil.")
+        else:
+            _logger.error(f"CDN yüklemesi başarısız oldu. Hata kodu: {response.status_code}, Yanıt: {response.text}")
+            raise Exception(f"CDN yüklemesi başarısız oldu. Hata kodu: {response.status_code}")
+
+    def write(self, vals):
+        """Override write method to upload technical drawing to CDN if updated."""
+        res = super(ProductTemplate, self).write(vals)
+        if 'technical_drawing' in vals or 'technical_drawing_filename' in vals:
+            for record in self:
+                try:
+                    cdn_url = record.post_to_cdn()
+                    record.cdn_link = cdn_url
+                    # Chatter'a manuel mesaj gönderme kaldırıldı
+                    # `cdn_link` alanındaki değişiklikler otomatik olarak izlenecek
+                except Exception as e:
+                    _logger.error(f"Dosya yüklenirken hata oluştu: {str(e)}")
+                    raise models.ValidationError(f"Dosya yüklenirken hata oluştu: {str(e)}")
+        return res
+
+    @api.model
+    def create(self, vals):
+        """Override create method to upload technical drawing to CDN after creation."""
+        record = super(ProductTemplate, self).create(vals)
+        if record.technical_drawing and record.technical_drawing_filename:
+            try:
+                cdn_url = record.post_to_cdn()
+                record.cdn_link = cdn_url
+                # Chatter'a manuel mesaj gönderme kaldırıldı
+                # `cdn_link` alanındaki değişiklikler otomatik olarak izlenecek
+            except Exception as e:
+                _logger.error(f"Dosya yüklenirken hata oluştu: {str(e)}")
+                raise models.ValidationError(f"Dosya yüklenirken hata oluştu: {str(e)}")
+        return record
+    
 class PackageTypes(models.Model):
     _inherit = "stock.package.type"
 
